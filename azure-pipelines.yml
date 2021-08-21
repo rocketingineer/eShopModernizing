@@ -14,7 +14,7 @@ variables:
   imageRepository: 'eshopmodernizing-cicd'
   containerRegistry: 'acreshop.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/eShopModernizedMVCSolution/src/eShopModernizedMVC/Dockerfile'
-  buildcontextPath: 'eShopModernizedMVCSolution/src/eShopModernizedMVC'
+  buildcontextPath: '$(Build.SourcesDirectory)/eShopModernizedMVCSolution/src/eShopModernizedMVC'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
