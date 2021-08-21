@@ -10,9 +10,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019 AS build  
 WORKDIR "/src"  
 COPY ["./eShopLegacyMVC.csproj", "eShopLegacyMVC/"]  
-RUN dotnet restore "eShopLegacyMVC/eShopLegacyMVC.csproj"  
+RUN nuget restore "eShopLegacyMVC/eShopLegacyMVC.csproj"  
 COPY . .  
-WORKDIR "/src"  
+WORKDIR "/src/eShopLegacyMVC"  
 RUN dotnet build "eShopLegacy.csproj" -c Release -o /app/build  
 
 
