@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: '61e31ad6-387c-404d-9ca6-e621290e0751'
   imageRepository: 'eshopmodernizedmvc'
   containerRegistry: 'acreshop.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/eShopModernizedMVCSolution/src/eShopModernizedMVC/dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/**/eShopModernizedMVCSolution/src/eShopModernizedMVC/dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
