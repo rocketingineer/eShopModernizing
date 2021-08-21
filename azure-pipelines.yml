@@ -14,6 +14,7 @@ variables:
   imageRepository: 'eshopmodernizing-cicd'
   containerRegistry: 'acreshop.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/eShopModernizedMVCSolution/src/eShopModernizedMVC/Dockerfile'
+  buildcontextPath: 'eShopModernizedMVCSolution/src/eShopModernizedMVC'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
@@ -34,7 +35,7 @@ stages:
         command: buildAndPush
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
-        buildContext: eShopModernizedMVCSolution/src/eShopModernizedMVC
+        buildContext: $(buildcontextPath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
