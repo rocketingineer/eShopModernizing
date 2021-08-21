@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: '13830215-2273-4def-8ee1-da4b57cbce69'
   imageRepository: 'eshopmodernizing-cicd'
   containerRegistry: 'acreshop.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/eShopLegacyMVCSolution/src/eShopLegacyMVC/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/eShopModernizedMVCSolution/src/docker-compose.yml'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
