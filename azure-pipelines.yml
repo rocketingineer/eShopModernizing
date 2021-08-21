@@ -34,7 +34,7 @@ stages:
         command: buildAndPush
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
-        buildContext: eShopModernizedMVCSolutions/src/eShopModernizedMVC
+        buildContext: eShopModernizedMVCSolution/src/eShopModernizedMVC
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
