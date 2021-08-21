@@ -12,7 +12,7 @@ WORKDIR "/src"
 COPY ["eShopLegacyMVC.csproj", "eShopLegacyMVC/"]  
 
 
-RUN dotnet restore "eShopLegacyMVC/eShopLegacyMVC.csproj"  
+RUN dotnet restore "eShopLegacyMVC.csproj"  
 COPY . .  
 WORKDIR "/src/eShopLegacy"  
 RUN dotnet build "eShopLegacy.csproj" -c Release -o /app/build  
