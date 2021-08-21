@@ -10,19 +10,12 @@ pool:
   vmImage: windows-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Azure Container Registry'
     azureSubscription: 'azdevops-spn'
     azureContainerRegistry: '{"loginServer":"acreshop.azurecr.io", "id" : "/subscriptions/2f6a75ae-9e86-49d6-8782-56786af2bfe0/resourceGroups/rg-eshop-demo/providers/Microsoft.ContainerRegistry/registries/acreshop"}'
-    dockerComposeFile: '**/eShopmodernizedMVCSolution/src/docker-compose.yml'
-    additionalDockerComposeFiles: '**/eShopmodernizedMVCSolution/src/docker-compose.override.yml'
+    dockerComposeFile: '**/docker-compose.yml'
+    additionalDockerComposeFiles: '**/docker-compose.override.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'docker-compose up -d'
