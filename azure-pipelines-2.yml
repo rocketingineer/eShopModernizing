@@ -15,6 +15,6 @@ steps:
     containerregistrytype: 'Azure Container Registry'
     azureSubscription: 'azdevops-spn'
     azureContainerRegistry: '{"loginServer":"acreshop.azurecr.io", "id" : "/subscriptions/2f6a75ae-9e86-49d6-8782-56786af2bfe0/resourceGroups/rg-eshop-demo/providers/Microsoft.ContainerRegistry/registries/acreshop"}'
-    dockerComposeFile: 'eshopmodernizing/eshopmodernizedmvcsolution/src/docker-compose.yml'
+    dockerComposeFile: '$(Build.SourcesDirectory)/eShopModernizedMVCSolution/src/eShopModernizedMVC/docker-compose.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'docker-compose -f docker-compose.yml -f docker-compose.override.yml build'
