@@ -13,11 +13,11 @@ COPY ["./eShopLegacyMVC.csproj", "eShopLegacyMVC/"]
 RUN nuget restore "eShopLegacyMVC/eShopLegacyMVC.csproj"  
 COPY . .  
 WORKDIR "/src/eShopLegacyMVC"  
-RUN dotnet build "eShopLegacyMVC/eShopLegacy.csproj" -c Release -o /app/build  
+RUN dotnet build "eShopLegacyMVC/eShopLegacyMVC.csproj" -c Release -o /app/build  
 
 
 FROM build AS publish  
-RUN dotnet publish "eShopLegacy.csproj" -c Release -o /app/publish  
+RUN dotnet publish "eShopLegacyMVC.csproj" -c Release -o /app/publish  
 FROM base AS final  
 WORKDIR /app  
 COPY --from=publish /app/publish .  
