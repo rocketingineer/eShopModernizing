@@ -1,0 +1,19 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: CmdLine@2
+  inputs:
+    script: |
+      nuget restore eShopModernizedMVCSolution\eShopModernizedMVC.sln
+      msbuild eShopModernizedMVCSolution\src\eShopModernizedMVC\eShopModernizedMVC.csproj /nologo /p:PublishProfile=FolderProfile.pubxml /p:DeployOnBuild=true /p:docker_publish_root=..\..\..\deploy\mvc\
+      
+      @copy /Y eShopModernizedMVCSolution\src\eShopModernizedMVC\Dockerfile deploy\mvc
