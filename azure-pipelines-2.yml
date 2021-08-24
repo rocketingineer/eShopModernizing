@@ -14,6 +14,4 @@ steps:
   inputs:
     script: |
       nuget restore eShopModernizedMVCSolution\eShopModernizedMVC.sln
-      msbuild eShopModernizedMVCSolution\src\eShopModernizedMVC\eShopModernizedMVC.csproj /nologo /p:PublishProfile=FolderProfile.pubxml /p:DeployOnBuild=true /p:docker_publish_root=..\..\..\deploy\mvc\
-      
-      @copy /Y eShopModernizedMVCSolution\src\eShopModernizedMVC\Dockerfile deploy\mvc
+  
