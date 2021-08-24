@@ -11,10 +11,11 @@ pool:
 
 
 steps:
-- task: CmdLine@2
+- task: NuGetCommand@2
   inputs:
-    script: |
-      nuget restore eShopModernizedMVCSolution\eShopModernizedMVC.sln
+    command: 'restore'
+    restoreSolution: 'eShopModernizedMVCSolution\eShopModernizedMVC.sln'
+    feedsToUse: 'select'
 - task: VSBuild@1
   inputs:
           solution: 'eShopModernizedMVCSolution\eShopModernizedMVC.sln'
