@@ -9,9 +9,16 @@ trigger:
 pool:
   vmImage: windows-latest
 
+
 steps:
 - task: CmdLine@2
   inputs:
     script: |
       nuget restore eShopModernizedMVCSolution\eShopModernizedMVC.sln
-  
+- task: VSBuild@1
+  inputs:
+          solution: 'eShopModernizedMVCSolution\eShopModernizedMVC.sln'
+          vsVersion: '16.0'
+          msbuildArgs: '/nologo /p:PublishProfile=FolderProfile.pubxml /p:DeployOnBuild=true /p:docker_publish_root=..\..\..\deploy\mvc\'
+          platform: '$(BuildPlatform)'
+          configuration: '$(BuildConfiguration)'
