@@ -21,3 +21,6 @@ steps:
           solution: 'eShopModernizedMVCSolution\eShopModernizedMVC.sln'
           vsVersion: '16.0'
           msbuildArgs: '/nologo /p:PublishProfile=FolderProfile.pubxml /p:DeployOnBuild=true /p:docker_publish_root=..\..\..\deploy\mvc\'
+- task: CmdLine@2
+  inputs:
+          script: '@copy /Y eShopModernizedMVCSolution\src\eShopModernizedMVC\Dockerfile deploy\mvc'
