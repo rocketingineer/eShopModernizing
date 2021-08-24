@@ -35,4 +35,4 @@ steps:
     additionalDockerComposeFiles: 'docker-compose.override.yml'
     projectName: '$(Build.Name)'
     action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'docker-compose -f docker-compose.yml -f docker-compose.override.yml build'
+    dockerComposeCommand: 'docker-compose build'
