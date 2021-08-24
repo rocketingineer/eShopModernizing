@@ -32,7 +32,7 @@ steps:
     azureSubscription: 'azdevops-spn'
     azureContainerRegistry: '{"loginServer":"acreshop.azurecr.io", "id" : "/subscriptions/2f6a75ae-9e86-49d6-8782-56786af2bfe0/resourceGroups/rg-eshop-demo/providers/Microsoft.ContainerRegistry/registries/acreshop"}'
     
-    dockerComposeFile: 'deploy/mvc/eShopModernizedMVCSolution/docker-compose.yml'
+    dockerComposeFile: '.\deploy\mvc\eShopModernizedMVCSolution\docker-compose.yml'
     additionalDockerComposeFiles: 'docker-compose.override.yml'
     projectName: '$(Build.Name)'
     action: 'Run a Docker Compose command'
