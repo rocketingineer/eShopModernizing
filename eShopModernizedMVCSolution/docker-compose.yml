@@ -5,7 +5,7 @@ services:
     image: eshop/modernizedmvc:4.8
     platform: windows/amd64
     build:
-      context: .\deploy\mvc
+      context: .\src\eShopModernizedMVC
       dockerfile: Dockerfile
     depends_on:
      - sql.data
