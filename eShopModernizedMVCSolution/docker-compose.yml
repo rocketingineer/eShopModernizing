@@ -3,8 +3,9 @@ version: '3.4'
 services:
   eshop.modernized.mvc:
     image: eshop/modernizedmvc:4.8
+    platform: windows/amd64
     build:
-      context: .\src\eShopModernizedMVC
+      context: ./deploy/mvc
       dockerfile: Dockerfile
     depends_on:
      - sql.data
