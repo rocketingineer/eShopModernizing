@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: windows-latest
 
+variables:
+ - name: environment
+   value: extsqldb
 
 steps:
 - task: NuGetCommand@2
@@ -32,4 +35,4 @@ steps:
     repository: 'eshop-modernized-cicd'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
-    tags: latest
+    tags: '$(environment)'
