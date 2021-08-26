@@ -32,3 +32,4 @@ steps:
     repository: 'eshop-modernized-cicd'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+    tags: latest
