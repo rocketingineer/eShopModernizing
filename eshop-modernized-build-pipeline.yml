@@ -9,6 +9,10 @@ trigger:
 pool:
   vmImage: windows-latest
 
+variables:
+  - name: environment
+    value: extdb
+
 steps:
 - task: NuGetCommand@2
   inputs:
@@ -28,13 +32,9 @@ steps:
           script: '@copy /Y eShopModernizedMVCSolution\src\eShopModernizedMVC\Dockerfile deploy\mvc'
           
 - task: Docker@2
-   
   inputs:
     containerRegistry: 'acreshop'
     repository: 'eshop-modernized-cicd'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: '$(environment)'
-
-
-
