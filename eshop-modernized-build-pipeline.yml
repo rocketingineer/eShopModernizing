@@ -9,32 +9,27 @@ trigger:
 pool:
   vmImage: windows-latest
 
-
-
 steps:
 - task: NuGetCommand@2
   inputs:
     command: 'restore'
     restoreSolution: 'eShopModernizedMVCSolution\eShopModernizedMVC.sln'
     feedsToUse: 'select'
+
 - task: VSBuild@1
   inputs:
           solution: 'eShopModernizedMVCSolution\eShopModernizedMVC.sln'
           vsVersion: '16.0'
           msbuildArgs: '/nologo /p:PublishProfile=FolderProfile.pubxml /p:DeployOnBuild=true /p:docker_publish_root=..\..\..\deploy\mvc\'
           maximumCpuCount: true
+
 - task: CmdLine@2
   inputs:
           script: '@copy /Y eShopModernizedMVCSolution\src\eShopModernizedMVC\Dockerfile deploy\mvc'
           
 - task: Docker@2
-
-
-  variables:
-    - name: environment
-      value: extdb
-    
-inputs:
+   
+  inputs:
     containerRegistry: 'acreshop'
     repository: 'eshop-modernized-cicd'
     command: 'buildAndPush'
