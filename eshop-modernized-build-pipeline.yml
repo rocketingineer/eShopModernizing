@@ -14,11 +14,6 @@ variables:
     value: extsqldb
 
 steps:
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: 'eShopModernizedMVCSolution\eShopModernizedMVC.sln'
-    feedsToUse: 'select'
 
 - task: VSBuild@1
   inputs:
