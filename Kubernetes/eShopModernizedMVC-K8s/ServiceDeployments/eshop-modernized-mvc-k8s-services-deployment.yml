@@ -1,9 +1,13 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eshop-modernized-mvc
+
 spec:
   replicas: 1
+  selector:
+  matchLabels:
+    app: eshop-modernized-mvc
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -15,8 +19,8 @@ spec:
         app: eshop-modernized-mvc
     spec:
       containers:
-      - name: eshop-modernized-mvc
-        image: eshop/modernizedmvc:4.7.1
+      - name: modernizedmvc
+        image: acreshop.azurecr.io/eshop/modernizedmvc:4.8
         ports:
         - containerPort: 80
         imagePullPolicy: Always
@@ -55,5 +59,7 @@ spec:
   ports:
   - port: 5115
     targetPort: 80
-  selector:
+selector:
+  matchLabels:
     app: eshop-modernized-mvc
+    
