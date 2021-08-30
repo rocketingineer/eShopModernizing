@@ -2,12 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eshop-modernized-mvc
-
+  labels:
+    app: eshop-modernized-mvc
 spec:
   replicas: 1
-  selector:
-  matchLabels:
-    app: eshop-modernized-mvc
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -15,6 +13,7 @@ spec:
   minReadySeconds: 5
   template:
     metadata:
+      name: eshop-modernized-mvc
       labels:
         app: eshop-modernized-mvc
     spec:
@@ -46,20 +45,21 @@ spec:
         - name: PostLogoutRedirectUri
           value: ""
       nodeSelector:
-       beta.kubernetes.io/os: windows
+       "kubernetes.io/os": windows
+
+  selector:
+      matchLabels:
+        app: eshop-modernized-mvc
+  
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: eshop-modernized-mvc
-  labels:
-    app: eshop-modernized-mvc
 spec:
   type: LoadBalancer
   ports:
   - port: 5115
     targetPort: 80
-selector:
-  matchLabels:
+  selector:
     app: eshop-modernized-mvc
-    

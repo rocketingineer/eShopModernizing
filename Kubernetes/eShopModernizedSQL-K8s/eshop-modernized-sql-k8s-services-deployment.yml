@@ -1,44 +1,48 @@
 apiVersion: apps/v1
 kind: Deployment
-
-selector:
-  matchLabels:
-  app: sql-data
-
 metadata:
-  name: sql-data
+  name: sql-db
+  labels:
+    app: sql-db
 spec:
-  selector:
-  matchLabels:
-  app: sql-data
+  replicas: 1
   template:
     metadata:
+      name: sql-db
       labels:
-        app: sql-data
+        app: sql-db
     spec:
+      nodeSelector:
+        "kubernetes.io/os": windows
       containers:
-      - name: sql-data
+      - name: sql-db
         image: microsoft/mssql-server-windows-developer
         env:
         - name: ACCEPT_EULA
           value: "Y"
         - name: SA_PASSWORD
           value: Pass@word
-      nodeSelector:
-       beta.kubernetes.io/os: windows
+        resources:
+          limits:
+            cpu: 1
+            memory: 800M
+          requests:
+            cpu: .1
+            memory: 300M
+        ports:
+          - containerPort: 1433
+  selector:
+    matchLabels:
+      app: sql-db
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: sql-data
-  name: sql-data
+  name: sql-db
 spec:
   type: LoadBalancer
-  #loadBalancerIP: 52.187.173.125
   ports:
-  - port: 1433
-    targetPort: 1433
-selector:
-  matchLabels:
-    app: sql-data
+  - protocol: TCP
+    port: 1433
+  selector:
+    app: sql-db
