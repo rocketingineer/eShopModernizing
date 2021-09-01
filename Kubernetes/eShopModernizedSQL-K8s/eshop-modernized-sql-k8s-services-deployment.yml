@@ -13,24 +13,31 @@ spec:
         app: sql-db
     spec:
       nodeSelector:
-        "kubernetes.io/os": windows
+        "kubernetes.io/os": linux
       containers:
       - name: sql-db
-        image: acreshop.azurecr.io/microsoft/mssql-server-windows-developer:latest
+        image: mcr.microsoft.com/mssql/server:2019-latest
         env:
         - name: ACCEPT_EULA
           value: "Y"
         - name: SA_PASSWORD
-          value: Pass@word
+          value: Pass@word2021!
         resources:
           limits:
             cpu: 1
-            memory: 800M
+            memory: 3000M
           requests:
             cpu: 1
             memory: 300M
         ports:
           - containerPort: 1433
+        volumeMounts:
+        - name: mssqldb
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: mssqldb
+        persistentVolumeClaim:
+          claimName: mssql-data
   selector:
     matchLabels:
       app: sql-db

@@ -22,10 +22,17 @@ spec:
         image: acreshop.azurecr.io/eshop/modernizedmvc:4.8
         ports:
         - containerPort: 80
+        resources:
+          limits:
+            cpu: 1
+            memory: 800M
+          requests:
+            cpu: 1
+            memory: 300M        
         imagePullPolicy: Always
         env:
         - name: ConnectionString
-          value: "Server=sql-data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word"
+          value: "Server=sql-data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word2021!"
         - name: UseMockData
           value: "False"
         - name: UseCustomizationData
