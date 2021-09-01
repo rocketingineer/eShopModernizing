@@ -16,7 +16,7 @@ spec:
         "kubernetes.io/os": windows
       containers:
       - name: sql-db
-        image: microsoft/mssql-server-windows-developer
+        image: acreshop.azurecr.io/microsoft/mssql-server-windows-developer:latest
         env:
         - name: ACCEPT_EULA
           value: "Y"

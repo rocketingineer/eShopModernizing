@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eshop-modernized-mvc
@@ -15,8 +15,15 @@ spec:
         app: eshop-modernized-mvc
     spec:
       containers:
-      - name: eshop-modernized-mvc
-        image: eshop/modernizedmvc
+      - name: modernizedmvc
+        image: acreshop.azurecr.io/eshop/modernizedmvc:4.8
+        resources:
+          limits:
+            cpu: 1
+            memory: 800M
+          requests:
+            cpu: 1
+            memory: 300M
         ports:
         - containerPort: 80
         imagePullPolicy: Always
@@ -43,6 +50,10 @@ spec:
           value: "#{your_aad_logout_refirect_uri}#"
       nodeSelector:
        kubernetes.io/os: windows
+  selector:
+      matchLabels:
+        app: eshop-modernized-mvc
+    
 ---
 apiVersion: v1
 kind: Service
