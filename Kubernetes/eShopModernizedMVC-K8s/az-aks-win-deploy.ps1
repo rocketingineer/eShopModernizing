@@ -7,8 +7,8 @@ $vnetName = "vnet-tmc-shop-kube"
 $snetName = "snet-tmc-shop-kube"
 $laname = "la-tmc-shop"
 $aksname = "aks-tmc-shop"
-$winpoolname = "pool-eshopwin"
-
+$winpoolname = "eshopw"
+#windows pool name length can be no longer than 6 chars
 
 az provider show -n Microsoft.OperationsManagement -o table
 az provider show -n Microsoft.OperationalInsights -o table
@@ -64,6 +64,7 @@ az aks get-credentials --resource-group rg-eshop-demo --name aks-tmc-shop
 #integrate an existing ACR with existing AKS clusters by supplying value values for acr name
 az aks update -g rg-eshop-demo -n aks-tmc-shop --attach-acr acreshop
 
+#add a windows node pool into the cluster, by default only Linux pool is created 
 az aks nodepool add `
     --resource-group $rg `
     --cluster-name $aksname `
