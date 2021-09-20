@@ -6,6 +6,9 @@ $rg = "rg-eshop-demo"
 $vnetName = "vnet-tmc-shop-kube"
 $snetName = "snet-tmc-shop-kube"
 $laname = "la-tmc-shop"
+$aksname = "aks-tmc-shop"
+$winpoolname = "eshopw"
+#windows pool name length can be no longer than 6 chars
 
 az provider show -n Microsoft.OperationsManagement -o table
 az provider show -n Microsoft.OperationalInsights -o table
@@ -34,10 +37,11 @@ az ad sp create-for-rbac --skip-assignment --name eShopKubeSPN
 
 
 az monitor log-analytics workspace create -g $rg -n $laname --no-wait
+  
 
 az aks create `
     --resource-group rg-eshop-demo `
-    --name aks-tmc-shop `
+    --name $aksname `
     --vm-set-type VirtualMachineScaleSets `
     --network-plugin azure `
     --vnet-subnet-id $SubnetID `
@@ -47,9 +51,23 @@ az aks create `
     --generate-ssh-keys `
     --service-principal 8eb2ff2a-8c0f-4fdb-aa39-b1c1a03d7fb5 `
     --client-secret 0W6O43hVKsRb_ei~NVXU0CuIn1oeK_c4Pm `
-    --node-count 1 
+    --load-balancer-sku Standard `
+    --node-count 1 `
+    --windows-admin-username 
     
 
     
 
-az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+az aks get-credentials --resource-group rg-eshop-demo --name aks-tmc-shop
+
+
+#integrate an existing ACR with existing AKS clusters by supplying value values for acr name
+az aks update -g rg-eshop-demo -n aks-tmc-shop --attach-acr acreshop
+
+#add a windows node pool into the cluster, by default only Linux pool is created 
+az aks nodepool add `
+    --resource-group $rg `
+    --cluster-name $aksname `
+    --os-type Windows `
+    --name $winpoolname  `
+    --node-count 1

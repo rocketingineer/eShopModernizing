@@ -1,7 +1,9 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eshop-modernized-mvc
+  labels:
+    app: eshop-modernized-mvc
 spec:
   replicas: 1
   strategy:
@@ -11,18 +13,26 @@ spec:
   minReadySeconds: 5
   template:
     metadata:
+      name: eshop-modernized-mvc
       labels:
         app: eshop-modernized-mvc
     spec:
       containers:
-      - name: eshop-modernized-mvc
-        image: eshop/modernizedmvc:4.7.1
+      - name: modernizedmvc
+        image: acreshop.azurecr.io/eshop/modernizedmvc:4.8
         ports:
         - containerPort: 80
+        resources:
+          limits:
+            cpu: 1
+            memory: 800M
+          requests:
+            cpu: 1
+            memory: 300M        
         imagePullPolicy: Always
         env:
         - name: ConnectionString
-          value: "Server=sql-data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word"
+          value: "Server=sql-data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word2021!"
         - name: UseMockData
           value: "False"
         - name: UseCustomizationData
@@ -42,14 +52,17 @@ spec:
         - name: PostLogoutRedirectUri
           value: ""
       nodeSelector:
-       beta.kubernetes.io/os: windows
+       "kubernetes.io/os": windows
+
+  selector:
+      matchLabels:
+        app: eshop-modernized-mvc
+  
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: eshop-modernized-mvc
-  labels:
-    app: eshop-modernized-mvc
 spec:
   type: LoadBalancer
   ports:

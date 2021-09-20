@@ -24,7 +24,7 @@ spec:
         - name: ConnectionString
           value: "Server=sql-data-for-wcf;Database=eShopDatabase;User Id=sa;Password=Pass@word"
       nodeSelector:
-       beta.kubernetes.io/os: windows
+       kubernetes.io/os: windows
 ---
 apiVersion: v1
 kind: Service
